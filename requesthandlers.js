@@ -12,6 +12,12 @@ function index(response, postData, pathname, type) {
      fs.readFile(file, ready);
      function ready(err, content) { deliver(response, type, err, content); }
  }
+function form(response, postData, pathname, type) {
+ 	console.log("index request is handled");
+	 var file = "./public" + pathname;
+     fs.readFile(file, ready);
+     function ready(err, content) { deliver(response, type, err, content); }
+ }
 
 function style(response, postData, pathname, type){
 	console.log("style.css request is handled");	
@@ -36,8 +42,10 @@ function bristollogo(response, postData, pathname, type){
 
 
  exports.index = index;
+ exports.form = form;
 
  exports.style = style;
+
  exports.profilePicture = profilePicture;
  exports.bristollogo = bristollogo;
 // Deliver the file that has been read in to the browser.

@@ -5,6 +5,7 @@ var requestHandlers = require("./requestHandlers");
 var handle = {}
  handle["/"] = requestHandlers.index;
  handle["/index.html"] = requestHandlers.index;
+ handle["/form.html"] = requestHandlers.form;
 
  handle["/css/style.css"] = requestHandlers.style;
 

@@ -29,6 +29,7 @@ button{
 .heding-text{
 	font-size: 30px;
 	font-weight: 900;
+	margin: 0 15%;
 }
 .profile-picture-container{
 	width: auto;
