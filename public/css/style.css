@@ -15,12 +15,12 @@ a{
 	color: rgb(0,0,0);
 }
 a:hover{
-	color: rgb(255,255,255);
+	color: rgb(197,0,10);
 }
 button{
 	padding: 1%;
 	background-color: rgb(180,180,180);
-	border-radius: 20px;
+	border-radius: 20%;
 }
 .heading, .introduction-container{
 	margin: 2%;
@@ -55,5 +55,5 @@ button{
 	color: rgb(197,0,10);
 }
 .button-container{
-	margin: 2% 0;
+	margin-top: 2%;
 }
