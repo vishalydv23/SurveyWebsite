@@ -12,6 +12,7 @@ function index(response, postData, pathname, type) {
      fs.readFile(file, ready);
      function ready(err, content) { deliver(response, type, err, content); }
  }
+
 function form(response, postData, pathname, type) {
  	console.log("index request is handled");
 	 var file = "./public" + pathname;
@@ -19,6 +20,13 @@ function form(response, postData, pathname, type) {
      function ready(err, content) { deliver(response, type, err, content); }
  }
 
+function instruction(response, postData, pathname, type) {
+ 	console.log("index request is handled");
+	 var file = "./public" + pathname;
+     fs.readFile(file, ready);
+     function ready(err, content) { deliver(response, type, err, content); }
+ }
+// ******************************************************************************* css *************************************************************************
 function style(response, postData, pathname, type){
 	console.log("style.css request is handled");	
 	var file = "./public" + pathname;
@@ -26,6 +34,15 @@ function style(response, postData, pathname, type){
 	function ready(err, content) { deliver(response, type, err, content);}
 }
 
+// ******************************************************************************* javascript *************************************************************************
+function scriptForm(response, postData, pathname, type){
+	console.log("form.js request is handled");	
+	var file = "./public" + pathname;
+	fs.readFile(file, ready);
+	function ready(err, content) { deliver(response, type, err, content);}
+}
+
+// ******************************************************************************* images *************************************************************************
 function profilePicture(response, postData, pathname, type){
 	console.log("profile_picture request is handled");	
 	var file = "./public" + pathname;
@@ -43,8 +60,11 @@ function bristollogo(response, postData, pathname, type){
 
  exports.index = index;
  exports.form = form;
+ exports.instruction = instruction;
 
  exports.style = style;
+
+ exports.scriptForm = scriptForm;
 
  exports.profilePicture = profilePicture;
  exports.bristollogo = bristollogo;

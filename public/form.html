@@ -5,6 +5,8 @@
 	<title>WINTER HUG</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<script src="js/form.js"></script>
 
 </head>
 <body id="main-page-top">
@@ -14,13 +16,40 @@
 	<section class="introduction">
 		<div class="introduction-container">
 			<div class="text-container">
-				<p class="warning">To log into the servey you will be needing a 6 digit code. If you dont have code yet. Contact me on whatsapp (+91 8923080797)</p>
+				<p class="warning">To log into the servey you will be needing a 6 digit code. If you dont have code yet. Contact me on whatsapp (+91 8923080797).</p>
 			</div>
-<!-- 			<div class="button-container">
-				<button class="button"><a href="">PROCEED</a></button>
-			</div> -->
-			<div class="text-container" id="references">
-				
+			<div class="formcontainer">
+				<p class="text">Complete Name</p>	
+				<div>
+					<input type="text" name="name" id="name" class="form-input" maxlength="50"/>
+					<p id="namewarning" class="warning form-warning">Name can't be empty</p>
+				</div>
+				<p class="text">Date of Birth</p>
+				<div class="form-row show-inputbtns">
+        			<input type="date" data-date-inline-picker="false" data-date-open-on-focus="true" id="dob" class="form-input"/>
+        			<p id="dobwarning" class="warning form-warning">Please select date of birth.</p>
+    			</div>
+				<p class="text">Sex</p>
+				<select class="gender-select">
+					<option value="male">Male</option>
+					<option value="female">Female</option>
+				</select>
+				<p class="text">Ethnicity</p>
+				<select class="ethnicity">
+					<option value="caucasian">Caucasian</option>
+					<option value="black">Black/African</option>
+					<option value="indian">Asian (Indian Subcontinent)</option>
+					<option value="chinese">Asian (Chinese/Korean/Japanese)</option>
+					<option value="other">Asian (Other)</option>
+				</select>
+				<p class="text" >Secret Code</p>
+				<div>
+					<input type="password" name="secretCode" id="password" class="form-input" maxlength="6" />
+					<p  id="passwordwarning" class="warning form-warning">Please enter the secret code.</p>
+				</div>		
+			</div>
+			<div class="button-container">
+				<button id="login-button" class="button">LOGIN</button>
 			</div>
 		</div>
 	</section>

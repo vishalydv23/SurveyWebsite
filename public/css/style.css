@@ -58,3 +58,18 @@ button{
 .button-container{
 	margin-top: 2%;
 }
+/********************************************************* form.html *****************************************************************/
+select, .form-input{
+	min-width: 20%;
+}
+.show-inputbtns .input-buttons {
+    display: inline-block;
+}
+.form-warning{
+	padding-top: 0%;
+}
+/********************************************************* instruction.html *****************************************************************/
+.hi-user{
+	margin: 0;
+	font-size: 20px;
+}
