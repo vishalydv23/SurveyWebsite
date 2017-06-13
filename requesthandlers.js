@@ -79,6 +79,13 @@ function bristollogo(response, postData, pathname, type){
 	function ready(err, content) { deliver(response, type, err, content);}
 }
 
+function defaultprofile(response, postData, pathname, type){
+	console.log("bristol logo request is handled");	
+	var file = "./public" + pathname;
+	fs.readFile(file, ready);
+	function ready(err, content) { deliver(response, type, err, content);}
+}
+
 
  exports.index = index;
  exports.form = form;
@@ -93,6 +100,7 @@ function bristollogo(response, postData, pathname, type){
 
  exports.profilePicture = profilePicture;
  exports.bristollogo = bristollogo;
+ exports.defaultprofile = defaultprofile;
 // Deliver the file that has been read in to the browser.
 function deliver(response, type, err, content) {
     if (err) {

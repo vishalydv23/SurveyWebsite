@@ -17,4 +17,6 @@ var handle = {}
 
  handle["/img/vishalyadav.jpg"] = requestHandlers.profilePicture;
  handle["/img/bristollogo.png"] = requestHandlers.bristollogo;
+ handle["/img/defaultprofile.png"] = requestHandlers.defaultprofile;
+
 server.index(router.route, handle);

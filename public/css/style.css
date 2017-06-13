@@ -22,6 +22,17 @@ button{
 	background-color: rgb(180,180,180);
 	border-radius: 20%;
 }
+table{
+    display: inline-block;
+}
+td, th {
+	border: 2px solid rgb(0,0,0);
+	font-weight: 700;
+}
+td{
+	background-color: rgb(255,255,255);
+	color: rgb(197,0,10);
+}
 .heading, .introduction-container{
 	margin: 2%;
 	text-align: center;
@@ -72,4 +83,44 @@ select, .form-input{
 .hi-user{
 	margin: 0;
 	font-size: 20px;
+}
+/********************************************************* survey.html *****************************************************************/
+.survey-container{
+ 	display: -webkit-box; 
+ }
+.info-container{
+	display: -webkit-inline-box;
+ }
+.sitting-warning{
+	padding-top: 0%;
+ }
+.survey-image-container{
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+}
+.survey-image{
+	width: 42%;
+}
+.score-button-list-container{
+	text-align: center;
+}
+.score-submit-button-container{
+	text-align: center;
+	margin: 2% 0%;
+}
+.nav-button{
+	min-width: 12%;
+	margin: 0% 2%;
+}
+.nav-button-container, .score-button-list-container{
+	margin: 2% 0%;
+	text-align: center;
+}
+.table-container{
+    /*display: inline-block;*/
+    text-align: center;
+}
+.score-submit-button{
+	font-weight: 700;
 }
