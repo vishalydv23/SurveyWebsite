@@ -26,6 +26,14 @@ function instruction(response, postData, pathname, type) {
      fs.readFile(file, ready);
      function ready(err, content) { deliver(response, type, err, content); }
  }
+
+function survey(response, postData, pathname, type) {
+ 	console.log("index request is handled");
+	 var file = "./public" + pathname;
+     fs.readFile(file, ready);
+     function ready(err, content) { deliver(response, type, err, content); }
+ }
+ 
 // ******************************************************************************* css *************************************************************************
 function style(response, postData, pathname, type){
 	console.log("style.css request is handled");	
@@ -36,6 +44,20 @@ function style(response, postData, pathname, type){
 
 // ******************************************************************************* javascript *************************************************************************
 function scriptForm(response, postData, pathname, type){
+	console.log("form.js request is handled");	
+	var file = "./public" + pathname;
+	fs.readFile(file, ready);
+	function ready(err, content) { deliver(response, type, err, content);}
+}
+
+function scriptInstruction(response, postData, pathname, type){
+	console.log("form.js request is handled");	
+	var file = "./public" + pathname;
+	fs.readFile(file, ready);
+	function ready(err, content) { deliver(response, type, err, content);}
+}
+
+function scriptIndex(response, postData, pathname, type){
 	console.log("form.js request is handled");	
 	var file = "./public" + pathname;
 	fs.readFile(file, ready);
@@ -61,10 +83,13 @@ function bristollogo(response, postData, pathname, type){
  exports.index = index;
  exports.form = form;
  exports.instruction = instruction;
+ exports.survey = survey;
 
  exports.style = style;
 
  exports.scriptForm = scriptForm;
+ exports.scriptInstruction = scriptInstruction;
+ exports.scriptIndex = scriptIndex;
 
  exports.profilePicture = profilePicture;
  exports.bristollogo = bristollogo;
