@@ -1,6 +1,7 @@
-var database = require("../WinterHugWebTechCW/database");
+var database = require("../SurveyWebsite/database");
 var saveAs = require('file-saver');
 var fs = require("fs");
+var FileReader = require('filereader');
 var OK = 200;
 
 var querystring = require("querystring");
@@ -64,6 +65,13 @@ function scriptIndex(response, postData, pathname, type){
 	function ready(err, content) { deliver(response, type, err, content);}
 }
 
+function scriptSurvey(response, postData, pathname, type){
+	console.log("form.js request is handled");	
+	var file = "./public" + pathname;
+	fs.readFile(file, ready);
+	function ready(err, content) { deliver(response, type, err, content);}
+}
+
 // ******************************************************************************* images *************************************************************************
 function profilePicture(response, postData, pathname, type){
 	console.log("profile_picture request is handled");	
@@ -86,6 +94,63 @@ function defaultprofile(response, postData, pathname, type){
 	function ready(err, content) { deliver(response, type, err, content);}
 }
 
+// ******************************************************************************* json ***************************************************************************
+
+function functionImageDownload(response, postData, pathname, type) {
+ 	console.log("Image Download request is handled");
+
+	var formData = querystring.parse(postData);
+	var file = "./pics/" + formData.gender + "/" + formData.gender + ".jpg";
+
+	if(file){
+		var reader = new FileReader();
+		fs.readFile(file);
+	}
+
+	// String encodedImage = getStringFromBitmap(file);
+
+	// database.authentication(formData.username, formData.password, function(result){
+	// 	// console.log(result);
+	// 	if(result == 1){
+	// 		content = '{data:'+result.toString() +'}';
+	// 		var json = JSON.stringify(eval("(" + content + ")"));
+	// 		type = "application/json";
+	// 		var err;
+	// 		deliver(response, type, err, json);
+	// 	}else{
+	// 		content = '{data:'+result.toString() +'}';
+	// 		var json = JSON.stringify(eval("(" + content + ")"));
+	// 		type = "application/json";
+	// 		var err;
+	// 		deliver(response, type, err, json);
+	// 	}
+	// });
+ }
+
+ function functionAuthentication(response, postData, pathname, type) {
+ 	console.log("Authentication function request is handled");
+
+ 	var formData = querystring.parse(postData);
+ 	console.log(formData.password);
+ // 	database.authentication(formData.username, formData.password, function(result){
+	// 	// console.log(result);
+	// 	if(result == 1){
+	// 		content = '{data:'+result.toString() +'}';
+	// 		var json = JSON.stringify(eval("(" + content + ")"));
+	// 		type = "application/json";
+	// 		var err;
+	// 		deliver(response, type, err, json);
+	// 	}else{
+	// 		content = '{data:'+result.toString() +'}';
+	// 		var json = JSON.stringify(eval("(" + content + ")"));
+	// 		type = "application/json";
+	// 		var err;
+	// 		deliver(response, type, err, json);
+	// 	}
+	// });
+
+ }
+
 
  exports.index = index;
  exports.form = form;
@@ -94,9 +159,13 @@ function defaultprofile(response, postData, pathname, type){
 
  exports.style = style;
 
+ exports.functionImageDownload = functionImageDownload;
+ exports.functionAuthentication = functionAuthentication;
+
  exports.scriptForm = scriptForm;
  exports.scriptInstruction = scriptInstruction;
  exports.scriptIndex = scriptIndex;
+ exports.scriptSurvey = scriptSurvey;
 
  exports.profilePicture = profilePicture;
  exports.bristollogo = bristollogo;

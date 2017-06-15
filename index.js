@@ -11,9 +11,13 @@ var handle = {}
 
  handle["/css/style.css"] = requestHandlers.style;
 
+ handle["/imagedownload.json"] = requestHandlers.functionImageDownload;
+ handle["/authentication.json"] = requestHandlers.functionAuthentication;
+
  handle["/js/form.js"] = requestHandlers.scriptForm;
  handle["/js/instruction.js"] = requestHandlers.scriptInstruction;
  handle["/js/index.js"] = requestHandlers.scriptIndex;
+ handle["/js/survey.js"] = requestHandlers.scriptSurvey;
 
  handle["/img/vishalyadav.jpg"] = requestHandlers.profilePicture;
  handle["/img/bristollogo.png"] = requestHandlers.bristollogo;

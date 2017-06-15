@@ -25,7 +25,28 @@ $(document).ready(function(){
       }
 
       if(flag == 1){
-        window.location.href = "http://localhost:8080/instruction.html";
+
+        $.ajax({
+              type: 'POST',
+              data: 'name=' + $('#name').val() + '&dob=' + $('#dob').val() + '&sex=' + $('#sex').val() + '&ethnicity=' + $('#ethnicity').val() + '&password=' + $('#password').val(),
+              contentType: "application/json",
+              dataType:'json',
+              async:false,
+              url: 'http://localhost:8080/authentication.json',                      
+              success: function(response) {
+                  // var obj = JSON.parse(JSON.stringify(response));
+                  // if(obj.data == 0){
+                  //     alert("blog submitted");
+                  //     $('#topic').val("");
+                  //     $('#blog-text').val("");
+                  //     $('#pic').val("");
+                  //  }       
+                  // window.location.href = "http://localhost:8080/instruction.html";              
+              },
+              error: function(error) {
+                  console.log("some error in fetching the notifications");
+               }
+          });
       }
 
     });
