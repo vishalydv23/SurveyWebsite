@@ -48,6 +48,7 @@ $(document).ready(function(){
                       if (typeof(Storage) !== "undefined"){
                         localStorage.setItem("Name", $('#name').val());
                         localStorage.setItem("Secretcode", $('#password').val());
+                        localStorage.setItem("Gender", $('#sex').val());
                         console.log("secret code has been logged into the local storage");
                         window.location.href = "http://localhost:8080/instruction.html";
                       }else{
