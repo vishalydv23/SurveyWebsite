@@ -1,5 +1,7 @@
 $(document).ready(function(){
 
+  // alert("hi theer");
+
   $('#namewarning').hide();
   $('#passwordwarning').hide();
   $('#dobwarning').hide();
@@ -33,7 +35,6 @@ $(document).ready(function(){
               async:false,
               url: 'http://localhost:8080/authentication.json',                      
               success: function(response) {
-                  alert("hi");
                   var obj = JSON.parse(JSON.stringify(response));
                   if(obj.data == 1){
                       $('#passwordwarning').text("Secret Code entered is not 6 digit long");
@@ -41,13 +42,11 @@ $(document).ready(function(){
                    }else if(obj.data == 2){
                       $('#passwordwarning').text("Entered number is not a number");
                       $('#passwordwarning').show();
-                   }else if(obj.data == 3){
-                      // alert("new person added");
+                   }else if(obj.data == 5){
+                      alert("Wrong Secret Code! Enter correct code. In case, you don't have the code, contact Vishal Yadav on whatsapp: +91 8923080797");
+                   }else if(obj.data == 3 || obj.data == 4){
                       window.location.href = "http://localhost:8080/instruction.html"; 
-                   }else if(obj.data == 4){
-                      // alert("User already exist and credential matched: he/she can enter the website");
-                      window.location.href = "http://localhost:8080/instruction.html"; 
-                   }                                  
+                   }                                 
               },
               error: function(error) {
                   console.log("some error in fetching the notifications");
@@ -56,8 +55,8 @@ $(document).ready(function(){
       }
     });
 
-    $('#instruction-submit').click(function(){
-      alert("hi there");
-       window.location.href = "http://localhost:8080/survey.html";
-    });   
+  //   $('#instruction-submit').click(function(){
+  //     alert("hi there");
+  //      window.location.href = "http://localhost:8080/survey.html";
+  //   });   
 });

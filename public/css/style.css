@@ -78,6 +78,7 @@ select, .form-input{
 }
 .form-warning{
 	padding-top: 0%;
+	/*visibility: hidden;*/
 }
 /********************************************************* instruction.html *****************************************************************/
 .hi-user{

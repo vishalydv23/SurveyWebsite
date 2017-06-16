@@ -131,36 +131,60 @@ function formatDate(date) {
  	if(formData.password.length != 6){
  		console.log("Secret Code entered is not 6 digit long");
  		flag = 1;
+ 		content = '{data:'+flag.toString() +'}';
+		var json = JSON.stringify(eval("(" + content + ")"));
+		type = "application/json";
+		var err;
+		deliver(response, type, err, json);
  	}else if(!isnum){
  		console.log("entered number is not a number");
  		flag = 2;
- 	}
- 	database.authentication(formData.password, function(result){
- 		
- 		var res = formData.dob.substring(0, 4);
- 		var date = new Date();
+ 		content = '{data:'+flag.toString() +'}';
+		var json = JSON.stringify(eval("(" + content + ")"));
+		type = "application/json";
+		var err;
+		deliver(response, type, err, json);
+ 	}else{
+		 	database.authentication(formData.password, function(result){
+		 		
+		 		var res = formData.dob.substring(0, 4);
+		 		var date = new Date();
 
- 		var difference = formatDate(date) - res;
+		 		var difference = formatDate(date) - res;
 
- 		if(result == 2){
- 			database.adduser(formData.name, difference, formData.sex, formData.ethnicity, formData.password, function(result1){
- 				if(result1 == 0){
- 					console.log("New Person named " + formData.name + " entered detail successfully");
- 					flag = 3;
- 				}
- 			});
- 		}else{
- 			console.log("User already exist and credential matched: he/she can enter the website");
- 			flag = 4;
- 		}
-	});
-
-	content = '{data:'+flag.toString() +'}';
-			var json = JSON.stringify(eval("(" + content + ")"));
-			type = "application/json";
-			var err;
-			deliver(response, type, err, json);
+		 		if(result == 2){
+		 			database.adduser(formData.name, difference, formData.sex, formData.ethnicity, formData.password, function(result1){
+		 				if(result1 == 0){
+		 					console.log("New Person named " + formData.name + " entered detail successfully");
+		 					flag = 3;
+		 					content = '{data:'+flag.toString() +'}';
+							var json = JSON.stringify(eval("(" + content + ")"));
+							type = "application/json";
+							var err;
+							deliver(response, type, err, json);
+		 				}
+		 			});
+		 		}else if(result == 3){
+		 			console.log("User already exist and credential matched: he/she can enter the website");
+		 			flag = 4;
+		 			content = '{data:'+flag.toString() +'}';
+					var json = JSON.stringify(eval("(" + content + ")"));
+					type = "application/json";
+					var err;
+					deliver(response, type, err, json);
+		 		}else{
+		 			console.log("Credentials are wrong. Cannot enter the website");
+		 			flag = 5;
+		 			content = '{data:'+flag.toString() +'}';
+					var json = JSON.stringify(eval("(" + content + ")"));
+					type = "application/json";
+					var err;
+					deliver(response, type, err, json);
+		 		}
+			});
+		 }
  }
+
 
  exports.index = index;
  exports.form = form;
