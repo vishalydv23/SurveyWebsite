@@ -45,7 +45,14 @@ $(document).ready(function(){
                    }else if(obj.data == 5){
                       alert("Wrong Secret Code! Enter correct code. In case, you don't have the code, contact Vishal Yadav on whatsapp: +91 8923080797");
                    }else if(obj.data == 3 || obj.data == 4){
-                      window.location.href = "http://localhost:8080/instruction.html"; 
+                      if (typeof(Storage) !== "undefined"){
+                        localStorage.setItem("Name", $('#name').val());
+                        localStorage.setItem("Secretcode", $('#password').val());
+                        console.log("secret code has been logged into the local storage");
+                        window.location.href = "http://localhost:8080/instruction.html";
+                      }else{
+                        alert("Sorry! you cannot proceed with your current browser, kindly switch to Google Chrome, Opera, or mozilla");
+                      }              
                    }                                 
               },
               error: function(error) {

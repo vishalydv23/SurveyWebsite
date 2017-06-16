@@ -7,14 +7,7 @@ $(document).ready(function(){
               dataType:'json',
               async:false,
               url: 'http://localhost:8080/imagedownload.json',                      
-              success: function(response) {
-                  // var obj = JSON.parse(JSON.stringify(response));
-                  // if(obj.data == 0){
-                  //     alert("blog submitted");
-                  //     $('#topic').val("");
-                  //     $('#blog-text').val("");
-                  //     $('#pic').val("");
-                  //  }       
+              success: function(response) {   
                   alert("Hi how are you");                
               },
               error: function(error) {
