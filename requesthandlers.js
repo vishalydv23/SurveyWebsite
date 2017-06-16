@@ -155,6 +155,11 @@ function formatDate(date) {
 		 		if(result == 2){
 		 			database.adduser(formData.name, difference, formData.sex, formData.ethnicity, formData.password, function(result1){
 		 				if(result1 == 0){
+		 					database.addusertoscoretable(formData.password, function(result2){
+		 						if(result2 == 0){
+		 							console.log("New column added to the score table");
+		 						} 						
+		 					});
 		 					console.log("New Person named " + formData.name + " entered detail successfully");
 		 					flag = 3;
 		 					content = '{data:'+flag.toString() +'}';

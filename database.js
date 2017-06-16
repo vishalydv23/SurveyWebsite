@@ -48,5 +48,20 @@ function adduser(name, age, sex, ethnicity, password, callback1){
   });
 }
  
+ function addusertoscoretable(password, callback2){
+  "use strict"
+  var flag = 0;
+  db.serialize(function () {
+      db.all("ALTER TABLE score ADD COLUMN \'user" + password + "\' INTEGER", function (err) {
+        if (err){
+          throw err;
+        }else{
+          callback2(flag);
+        }
+      }); 
+  });
+}
+
  exports.authentication = authentication;
  exports.adduser = adduser;
+ exports.addusertoscoretable = addusertoscoretable;
