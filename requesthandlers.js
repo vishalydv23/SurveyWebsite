@@ -94,18 +94,28 @@ function defaultprofile(response, postData, pathname, type){
 	function ready(err, content) { deliver(response, type, err, content);}
 }
 
+function i2(response, postData, pathname, type){
+	console.log("bristol logo request is handled");	
+	var file = "./public" + pathname;
+	fs.readFile(file, ready);
+	function ready(err, content) { deliver(response, type, err, content);}
+}
+
 // ******************************************************************************* json ***************************************************************************
 
 function functionImageDownload(response, postData, pathname, type) {
  	console.log("Image Download request is handled");
 
 	var formData = querystring.parse(postData);
-	var file = "./pics/" + formData.gender + "/" + formData.gender + ".jpg";
+	database.checkNumberOfImagesScored(formData.secretcode, function(result){
+		console.log("Number of images left for :" + result);
+		content = '{data:'+result.toString() +'}';
+		var json = JSON.stringify(eval("(" + content + ")"));
+		type = "application/json";
+		var err;
+		deliver(response, type, err, json);
+	});
 
-	if(file){
-		var reader = new FileReader();
-		fs.readFile(file);
-	}
  }
 
 function formatDate(date) {
@@ -209,6 +219,8 @@ function formatDate(date) {
  exports.profilePicture = profilePicture;
  exports.bristollogo = bristollogo;
  exports.defaultprofile = defaultprofile;
+
+ exports.i2 = i2;
 // Deliver the file that has been read in to the browser.
 function deliver(response, type, err, content) {
     if (err) {

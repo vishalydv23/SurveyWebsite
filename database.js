@@ -62,6 +62,20 @@ function adduser(name, age, sex, ethnicity, password, callback1){
   });
 }
 
+function checkNumberOfImagesScored(password, callback3){
+  "use strict"
+  var flag = 0;
+  db.serialize(function () {
+      db.all("SELECT COUNT(user" + password + ") AS scoreCount FROM score", function (err, row) {
+        if (err){
+          throw err;
+        }else{
+          callback3(row[0].scoreCount);
+        }
+      }); 
+  });
+}
  exports.authentication = authentication;
  exports.adduser = adduser;
  exports.addusertoscoretable = addusertoscoretable;
+ exports.checkNumberOfImagesScored = checkNumberOfImagesScored;

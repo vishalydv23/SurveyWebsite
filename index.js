@@ -23,4 +23,9 @@ var handle = {}
  handle["/img/bristollogo.png"] = requestHandlers.bristollogo;
  handle["/img/defaultprofile.png"] = requestHandlers.defaultprofile;
 
+ for(var i = 1; i <= 300; i++){
+ 	handle["/img/faces/" + i + ".jpg"] = requestHandlers.i2;
+ }
+ handle["/img/faces/2.jpg"] = requestHandlers.i2;
+
 server.index(router.route, handle);
