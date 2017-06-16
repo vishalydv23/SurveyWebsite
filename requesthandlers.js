@@ -106,51 +106,61 @@ function functionImageDownload(response, postData, pathname, type) {
 		var reader = new FileReader();
 		fs.readFile(file);
 	}
-
-	// String encodedImage = getStringFromBitmap(file);
-
-	// database.authentication(formData.username, formData.password, function(result){
-	// 	// console.log(result);
-	// 	if(result == 1){
-	// 		content = '{data:'+result.toString() +'}';
-	// 		var json = JSON.stringify(eval("(" + content + ")"));
-	// 		type = "application/json";
-	// 		var err;
-	// 		deliver(response, type, err, json);
-	// 	}else{
-	// 		content = '{data:'+result.toString() +'}';
-	// 		var json = JSON.stringify(eval("(" + content + ")"));
-	// 		type = "application/json";
-	// 		var err;
-	// 		deliver(response, type, err, json);
-	// 	}
-	// });
  }
+
+function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return (year);
+}
 
  function functionAuthentication(response, postData, pathname, type) {
  	console.log("Authentication function request is handled");
 
  	var formData = querystring.parse(postData);
- 	console.log(formData.password);
- // 	database.authentication(formData.username, formData.password, function(result){
-	// 	// console.log(result);
-	// 	if(result == 1){
-	// 		content = '{data:'+result.toString() +'}';
-	// 		var json = JSON.stringify(eval("(" + content + ")"));
-	// 		type = "application/json";
-	// 		var err;
-	// 		deliver(response, type, err, json);
-	// 	}else{
-	// 		content = '{data:'+result.toString() +'}';
-	// 		var json = JSON.stringify(eval("(" + content + ")"));
-	// 		type = "application/json";
-	// 		var err;
-	// 		deliver(response, type, err, json);
-	// 	}
-	// });
 
+ 	var flag = 0;
+ 	var isnum = /^\d+$/.test(formData.password);
+
+ 	if(formData.password.length != 6){
+ 		console.log("Secret Code entered is not 6 digit long");
+ 		flag = 1;
+ 	}else if(!isnum){
+ 		console.log("entered number is not a number");
+ 		flag = 2;
+ 	}
+ 	database.authentication(formData.password, function(result){
+ 		
+ 		var res = formData.dob.substring(0, 4);
+ 		var date = new Date();
+
+ 		var difference = formatDate(date) - res;
+
+ 		if(result == 2){
+ 			database.adduser(formData.name, difference, formData.sex, formData.ethnicity, formData.password, function(result1){
+ 				if(result1 == 0){
+ 					console.log("New Person named " + formData.name + " entered detail successfully");
+ 					flag = 3;
+ 				}
+ 			});
+ 		}else{
+ 			console.log("User already exist and credential matched: he/she can enter the website");
+ 			flag = 4;
+ 		}
+	});
+
+	content = '{data:'+flag.toString() +'}';
+			var json = JSON.stringify(eval("(" + content + ")"));
+			type = "application/json";
+			var err;
+			deliver(response, type, err, json);
  }
-
 
  exports.index = index;
  exports.form = form;
