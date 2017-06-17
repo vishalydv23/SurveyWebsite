@@ -75,7 +75,38 @@ function checkNumberOfImagesScored(password, callback3){
       }); 
   });
 }
+
+function addScore(imageno, iscore, password, callback4){
+  "use strict"
+  var flag = 0;
+  db.serialize(function () {
+      db.all("UPDATE score SET user" + password + "=" + iscore + " WHERE imageno=" + imageno+ "", function (err) {
+        if (err){
+          throw err;
+        }else{
+          callback3(flag);
+        }
+      }); 
+  });
+}
+
+function checkType(imageno, callback5){
+  "use strict"
+  var flag = 0;
+  db.serialize(function () {
+      db.all("SELECT type FROM score WHERE imageno=" + imageno + "", function (err, row) {
+        if (err){
+          throw err;
+        }else{
+          callback5(row[0].type);
+        }
+      }); 
+  });
+}
+
  exports.authentication = authentication;
  exports.adduser = adduser;
  exports.addusertoscoretable = addusertoscoretable;
  exports.checkNumberOfImagesScored = checkNumberOfImagesScored;
+ exports.addScore = addScore;
+ exports.checkType = checkType;

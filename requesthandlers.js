@@ -109,11 +109,7 @@ function functionImageDownload(response, postData, pathname, type) {
 	var formData = querystring.parse(postData);
 	database.checkNumberOfImagesScored(formData.secretcode, function(result){
 		console.log("Number of images left for :" + result);
-		content = '{data:'+result.toString() +'}';
-		var json = JSON.stringify(eval("(" + content + ")"));
-		type = "application/json";
-		var err;
-		deliver(response, type, err, json);
+		responsecall(result);
 	});
 
  }
@@ -130,6 +126,39 @@ function formatDate(date) {
     return (year);
 }
 
+
+
+function functionsubmitscore(response, postData, pathname, type) {
+	console.log("submit score function request is handled");
+
+	var flag = 0;
+	var formData = querystring.parse(postData);
+	var isnum = /^\d+$/.test(formData.imagenumber); // check if the image number is actually a number or not
+
+	if(!isnum){
+		console.log("problem with data as default pic is returned");
+		flag = 1;
+		responsecall(flag);
+	}else{
+		database.addScore(formData.imagenumber, formData.score, formData.secretcode, function(result){
+			if(result == 0){
+				console.log("score added successfully");
+				database.checkType(formData.imagenumber, function(result){
+					console.log("type recieved successfully to reply back");
+					flag = 2;
+					content = '{data:'+flag.toString() +', type:' + result.toString() + '}';
+					var json = JSON.stringify(eval("(" + content + ")"));
+					type = "application/json";
+					var err;
+					deliver(response, type, err, json);
+				});		
+			}
+		});
+	}
+
+}
+
+
  function functionAuthentication(response, postData, pathname, type) {
  	console.log("Authentication function request is handled");
 
@@ -141,19 +170,11 @@ function formatDate(date) {
  	if(formData.password.length != 6){
  		console.log("Secret Code entered is not 6 digit long");
  		flag = 1;
- 		content = '{data:'+flag.toString() +'}';
-		var json = JSON.stringify(eval("(" + content + ")"));
-		type = "application/json";
-		var err;
-		deliver(response, type, err, json);
+ 		responsecall(flag);
  	}else if(!isnum){
  		console.log("entered number is not a number");
  		flag = 2;
- 		content = '{data:'+flag.toString() +'}';
-		var json = JSON.stringify(eval("(" + content + ")"));
-		type = "application/json";
-		var err;
-		deliver(response, type, err, json);
+ 		responsecall(flag);
  	}else{
 		 	database.authentication(formData.password, function(result){
 		 		
@@ -172,34 +193,29 @@ function formatDate(date) {
 		 					});
 		 					console.log("New Person named " + formData.name + " entered detail successfully");
 		 					flag = 3;
-		 					content = '{data:'+flag.toString() +'}';
-							var json = JSON.stringify(eval("(" + content + ")"));
-							type = "application/json";
-							var err;
-							deliver(response, type, err, json);
+		 					responsecall(flag);
 		 				}
 		 			});
 		 		}else if(result == 3){
 		 			console.log("User already exist and credential matched: he/she can enter the website");
 		 			flag = 4;
-		 			content = '{data:'+flag.toString() +'}';
-					var json = JSON.stringify(eval("(" + content + ")"));
-					type = "application/json";
-					var err;
-					deliver(response, type, err, json);
+		 			responsecall(flag);
 		 		}else{
 		 			console.log("Credentials are wrong. Cannot enter the website");
 		 			flag = 5;
-		 			content = '{data:'+flag.toString() +'}';
-					var json = JSON.stringify(eval("(" + content + ")"));
-					type = "application/json";
-					var err;
-					deliver(response, type, err, json);
+		 			responsecall(flag);
 		 		}
 			});
 		 }
  }
 
+function responsecall(flag){
+	content = '{data:'+flag.toString() +'}';
+	var json = JSON.stringify(eval("(" + content + ")"));
+	type = "application/json";
+	var err;
+	deliver(response, type, err, json);
+}
 
  exports.index = index;
  exports.form = form;
@@ -210,6 +226,7 @@ function formatDate(date) {
 
  exports.functionImageDownload = functionImageDownload;
  exports.functionAuthentication = functionAuthentication;
+ exports.functionsubmitscore = functionsubmitscore;
 
  exports.scriptForm = scriptForm;
  exports.scriptInstruction = scriptInstruction;
