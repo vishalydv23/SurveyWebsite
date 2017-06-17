@@ -78,7 +78,7 @@ $(document).ready(function(){
                     var d = new Date();
                     localStorage.setItem("CurrentTime", formatDate(d));
 
-                    window.location.href = "http://localhost:8080/index.html"
+                    window.location.href = "http://localhost:8080/index.html";
                   }else if (obj.type == "f2" && imageNo == 300){
                     alert("Thanks you for survey. You can now leave the site.");
                   }else{
