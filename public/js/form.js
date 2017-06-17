@@ -6,6 +6,12 @@ $(document).ready(function(){
   $('#passwordwarning').hide();
   $('#dobwarning').hide();
   
+
+
+  var d = new Date();
+  if((new Date(formatDate(d)) - new Date(localStorage.getItem("CurrentTime"))) < 4){ //cant loggin before 4 hours
+    alert("There has to ba a difference of 4 hours in 2 sits. Try again when Time is complete");
+  }else{
     $('#login-button').click(function(){
 
       var flag = 1;
@@ -49,6 +55,10 @@ $(document).ready(function(){
                         localStorage.setItem("Name", $('#name').val());
                         localStorage.setItem("Secretcode", $('#password').val());
                         localStorage.setItem("Gender", $('#sex').val());
+
+                        var d = new Date();
+                        localStorage.setItem("CurrentTime", formatDate(d));
+
                         console.log("secret code has been logged into the local storage");
                         window.location.href = "http://localhost:8080/instruction.html";
                       }else{
@@ -63,6 +73,26 @@ $(document).ready(function(){
       }
     });
 
+  }
+    
+
+    function formatDate(date) {
+      var d = new Date(date),
+          month = '' + (d.getMonth() + 1),
+          day = '' + d.getDate(),
+          year = d.getFullYear();
+
+          hour = d.getHour();
+          minutes = date.getMinutes();
+
+      if (month.length < 2) month = '0' + month;
+      if (day.length < 2) day = '0' + day;
+      if (hour.length < 2) day = '0' + hour;
+      if (minutes.length < 2) day = '0' + minutes;
+
+
+      return (year + "-" + month + "-" + day + " " + hour + ":" + minutes);
+  }
   //   $('#instruction-submit').click(function(){
   //     alert("hi there");
   //      window.location.href = "http://localhost:8080/survey.html";

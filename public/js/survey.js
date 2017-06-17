@@ -1,7 +1,5 @@
 $(document).ready(function(){
 
-  localStorage.setItem("Gender", "Male");
-
  $('#score-submit-button').click(function(){;
        var selValue = $('input[name=score]:checked').val();
        var imageNo = $('#survey-image').attr('src').filename();
