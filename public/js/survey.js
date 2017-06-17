@@ -1,8 +1,6 @@
 $(document).ready(function(){
 
   function showCurrentPicNumber(picNumber, type){
-    $("table td").css("color", "rgb(197,0,10)");
-    $("table td").css("background-color", "rgb(255,255,255)");
     if(type == "m1"){
       $("#c" + picNumber).css("color", "rgb(0,0,0)");
       $("#c" + picNumber).css("background-color", "rgb(0,255,0)");
@@ -10,13 +8,27 @@ $(document).ready(function(){
       $("#c" + (picNumber - 71) + "").css("color", "rgb(0,0,0)");
       $("#c" + (picNumber - 71) + "").css("background-color", "rgb(0,255,0)");
     }else if(type == "f1"){
-      // $(td).css("color", "rgb(255, 255,10)");
-      // $(td).css("background-color", "rgb(255,255,255)");
       $("#c" + (picNumber - 150) + "").css("color", "rgb(0,0,0)");
       $("#c" + (picNumber - 150) + "").css("background-color", "rgb(0,255,0)");
     }else if(type == "m2"){
       $("#c" + (picNumber - 219) + "").css("color", "rgb(0,0,0)");
       $("#c" + (picNumber - 219) + "").css("background-color", "rgb(0,255,0)");
+    }
+  }
+
+    function showCurrentPicNumberInvert(picNumber, type){
+    if(type == "m1"){
+      $("#c" + picNumber).css("color", "rgb(197,0,10)");
+      $("#c" + picNumber).css("background-color", "rgb(255,255,255)");
+    }else if(type == "m2"){
+      $("#c" + (picNumber - 71) + "").css("color", "rgb(197,0,10)");
+      $("#c" + (picNumber - 71) + "").css("background-color", "rgb(255,255,255)");
+    }else if(type == "f1"){
+      $("#c" + (picNumber - 150) + "").css("color", "rgb(197,0,10)");
+      $("#c" + (picNumber - 150) + "").css("background-color", "rgb(255,255,255)");
+    }else if(type == "m2"){
+      $("#c" + (picNumber - 219) + "").css("color", "rgb(197,0,10)");
+      $("#c" + (picNumber - 219) + "").css("background-color", "rgb(255,255,255)");
     }
   }
 
@@ -31,10 +43,10 @@ $(document).ready(function(){
     if((imagetype == "m1" && numericalImageNo == 71) || (imagetype == "m2" && numericalImageNo == 150) ||(imagetype == "f1" && numericalImageNo == 219) || numericalImageNo == 300){
       $('#next-nav-button').hide();
     }else{
-        $('#survey-image').attr("src","../img/faces/" + numericalImageNo + ".jpg");   
+        $('#survey-image').attr("src","../img/faces/" + numericalImageNo + ".jpg");  
+        showCurrentPicNumberInvert(numericalImageNo - 1, imagetype);
+         imagenumbercheck(); 
         showCurrentPicNumber(numericalImageNo, imagetype);
-        imagenumbercheck();
-
     }
   });
 
@@ -52,8 +64,9 @@ $(document).ready(function(){
       $('#previous-nav-button').hide();
     }else{
       $('#survey-image').attr("src","../img/faces/" + numericalImageNo + ".jpg");   
-      showCurrentPicNumber(numericalImageNo, imagetype);
+      showCurrentPicNumberInvert(numericalImageNo + 1, imagetype);
       imagenumbercheck();
+      showCurrentPicNumber(numericalImageNo, imagetype);
     }
   });
 
@@ -74,7 +87,7 @@ $(document).ready(function(){
                   localStorage.setItem("ImageType", obj.type);
 
                   if((obj.type == "m1" && imageNo == 71) || (obj.type == "m2" && imageNo == 150) ||(obj.type == "f1" && imageNo == 219)){
-                    alert("You sitting session has ended, next session will start after 4 hours");
+                    alert("You sitting session has ended, next session will start after 1 hours");
                     var d = new Date();
                     localStorage.setItem("CurrentTime", formatDate(d));
 
@@ -82,13 +95,14 @@ $(document).ready(function(){
                   }else if (obj.type == "f2" && imageNo == 300){
                     alert("Thanks you for survey. You can now leave the site.");
                   }else{
-                    // alert(imageNo);
+              
                     var numericalImageNo = parseInt(imageNo);
                     numericalImageNo = numericalImageNo + 1;
-                    // alert(numericalImageNo);
-                    $('#survey-image').attr("src","../img/faces/" + numericalImageNo + ".jpg");
-                    showCurrentPicNumber(numericalImageNo, obj.type);
+                  
+                    $('#survey-image').attr("src","../img/faces/" + numericalImageNo + ".jpg"); 
+                    showCurrentPicNumberInvert(numericalImageNo - 1, obj.type);
                     imagenumbercheck();
+                    showCurrentPicNumber(numericalImageNo, obj.type);                                    
                   }
                 }
               }
@@ -114,6 +128,7 @@ String.prototype.filename = function(extension){
                 // var numericalImageNo = parseInt(imageNo);
                 
                 var obj = JSON.parse(JSON.stringify(response));  
+                imagenumbercheck();
                 if(localStorage.getItem("Gender") == "male"){
                                 if(obj.data <= 69){
 
@@ -270,7 +285,6 @@ String.prototype.filename = function(extension){
                                 }
                           }
                       }  
-                      imagenumbercheck();
               },
             error: function(error) {
                 console.log("some error in fetching the notifications");
