@@ -126,8 +126,6 @@ function formatDate(date) {
     return (year);
 }
 
-
-
 function functionsubmitscore(response, postData, pathname, type) {
 	console.log("submit score function request is handled");
 
@@ -144,9 +142,8 @@ function functionsubmitscore(response, postData, pathname, type) {
 			if(result == 0){
 				console.log("score added successfully");
 				database.checkType(formData.imagenumber, function(result){
-					console.log("type recieved successfully to reply back");
 					flag = 2;
-					content = '{data:'+flag.toString() +', type:' + result.toString() + '}';
+					content = '{data:'+flag.toString() +', type:\"' + result.toString() + '\"}';
 					var json = JSON.stringify(eval("(" + content + ")"));
 					type = "application/json";
 					var err;

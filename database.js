@@ -84,7 +84,7 @@ function addScore(imageno, iscore, password, callback4){
         if (err){
           throw err;
         }else{
-          callback3(flag);
+          callback4(flag);
         }
       }); 
   });

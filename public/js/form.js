@@ -29,7 +29,7 @@ $(document).ready(function(){
 
       var d = new Date();
       if(localStorage.getItem("CurrentTime") == null){
-        localStorage.setItem("CurrentTime", 0);
+        localStorage.setItem("CurrentTime", formatDate(d));
       }
 
       if((new Date(formatDate(d)) - new Date(localStorage.getItem("CurrentTime"))) < 4){ //cant loggin before 4 hours
@@ -58,9 +58,6 @@ $(document).ready(function(){
                         localStorage.setItem("Name", $('#name').val());
                         localStorage.setItem("Secretcode", $('#password').val());
                         localStorage.setItem("Gender", $('#sex').val());
-
-                        var d = new Date();
-                        localStorage.setItem("CurrentTime", formatDate(d));
 
                         console.log("secret code has been logged into the local storage");
                         window.location.href = "http://localhost:8080/instruction.html";
