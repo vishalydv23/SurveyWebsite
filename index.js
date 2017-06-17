@@ -14,6 +14,7 @@ var handle = {}
  handle["/imagedownload.json"] = requestHandlers.functionImageDownload;
  handle["/authentication.json"] = requestHandlers.functionAuthentication;
  handle["/submitscore.json"] = requestHandlers.functionsubmitscore;
+ handle["/scoredimagenumber.json"] = requestHandlers.functionScoredImagesNumber;
  
 
  handle["/js/form.js"] = requestHandlers.scriptForm;

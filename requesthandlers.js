@@ -155,6 +155,27 @@ function functionsubmitscore(response, postData, pathname, type) {
 
 }
 
+function functionScoredImagesNumber(response, postData, pathname, type) {
+	console.log("The images score check function is handled");
+	var formData = querystring.parse(postData);
+
+	database.getImageNumber(formData.secretcode, function(result){
+		// console.log("**************" + result.length);
+		content1 = '{data: [';
+		for(var i = 0; i < result.length; i++){
+				if(i == (result.length-1)){
+					content1 = content1 + '{imageno:' + result[i].imageno + '}';
+				}else{
+					content1 = content1 + '{imageno:' + result[i].imageno + '},';
+				}		
+		}
+		content1 = content1 + ']}';
+		var json = JSON.stringify(eval("(" + content1 + ")"));
+		type = "application/json";
+		var err;
+		deliver(response, type, err, json);
+	});
+}
 
  function functionAuthentication(response, postData, pathname, type) {
  	console.log("Authentication function request is handled");
@@ -224,6 +245,7 @@ function responsecall(flag,response, type){
  exports.functionImageDownload = functionImageDownload;
  exports.functionAuthentication = functionAuthentication;
  exports.functionsubmitscore = functionsubmitscore;
+ exports.functionScoredImagesNumber = functionScoredImagesNumber;
 
  exports.scriptForm = scriptForm;
  exports.scriptInstruction = scriptInstruction;

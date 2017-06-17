@@ -1,8 +1,23 @@
 $(document).ready(function(){
 
-  function showCurrentPicNumber(picNumber){
-    $("#" + picNumber).css("color", "black");
-    $("#" + picNumber).css("background-color", "green");
+  function showCurrentPicNumber(picNumber, type){
+    $("table td").css("color", "rgb(197,0,10)");
+    $("table td").css("background-color", "rgb(255,255,255)");
+    if(type == "m1"){
+      $("#c" + picNumber).css("color", "rgb(0,0,0)");
+      $("#c" + picNumber).css("background-color", "rgb(0,255,0)");
+    }else if(type == "m2"){
+      $("#c" + (picNumber - 71) + "").css("color", "rgb(0,0,0)");
+      $("#c" + (picNumber - 71) + "").css("background-color", "rgb(0,255,0)");
+    }else if(type == "f1"){
+      // $(td).css("color", "rgb(255, 255,10)");
+      // $(td).css("background-color", "rgb(255,255,255)");
+      $("#c" + (picNumber - 150) + "").css("color", "rgb(0,0,0)");
+      $("#c" + (picNumber - 150) + "").css("background-color", "rgb(0,255,0)");
+    }else if(type == "m2"){
+      $("#c" + (picNumber - 219) + "").css("color", "rgb(0,0,0)");
+      $("#c" + (picNumber - 219) + "").css("background-color", "rgb(0,255,0)");
+    }
   }
 
  $('#next-nav-button').click(function(){
@@ -17,7 +32,8 @@ $(document).ready(function(){
       $('#next-nav-button').hide();
     }else{
         $('#survey-image').attr("src","../img/faces/" + numericalImageNo + ".jpg");   
-        showCurrentPicNumber(numericalImageNo);
+        showCurrentPicNumber(numericalImageNo, imagetype);
+
     }
   });
 
@@ -35,7 +51,7 @@ $(document).ready(function(){
       $('#previous-nav-button').hide();
     }else{
       $('#survey-image').attr("src","../img/faces/" + numericalImageNo + ".jpg");   
-      showCurrentPicNumber(numericalImageNo);
+      showCurrentPicNumber(numericalImageNo, imagetype);
     }
   });
 
@@ -69,7 +85,7 @@ $(document).ready(function(){
                     numericalImageNo = numericalImageNo + 1;
                     // alert(numericalImageNo);
                     $('#survey-image').attr("src","../img/faces/" + numericalImageNo + ".jpg");
-                    showCurrentPicNumber(numericalImageNo);
+                    showCurrentPicNumber(numericalImageNo, obj.type);
                   }
                 }
               }
@@ -107,7 +123,7 @@ String.prototype.filename = function(extension){
                                 }
                                 var image_number = obj.data + 1 + 150;
                                 $('#survey-image').attr("src","../img/faces/" + image_number + ".jpg");
-                                showCurrentPicNumber(image_number);
+                                showCurrentPicNumber(image_number, "f1");
 
                                 if(image_number == 151){
                                   $('#previous-nav-button').hide();
@@ -127,7 +143,7 @@ String.prototype.filename = function(extension){
 
                                 var image_number = obj.data + 1 + 219;
                                 $('#survey-image').attr("src","../img/faces/" + image_number + ".jpg");
-                                showCurrentPicNumber(image_number);
+                                showCurrentPicNumber(image_number, "f2");
 
 
                                  if(image_number == 220){
@@ -147,7 +163,7 @@ String.prototype.filename = function(extension){
                                 }
                                 var image_number = obj.data - 151;
                                 $('#survey-image').attr("src","../img/faces/" + image_number + ".jpg");
-                                showCurrentPicNumber(image_number);
+                                showCurrentPicNumber(image_number, "m1");
 
 
                                 if(image_number == 1){
@@ -169,7 +185,7 @@ String.prototype.filename = function(extension){
                                 }
                                 var image_number = obj.data - 220;
                                 $('#survey-image').attr("src","../img/faces/" + image_number + ".jpg");
-                                showCurrentPicNumber(image_number);
+                                showCurrentPicNumber(image_number, "m2");
 
 
                                 if(image_number == 72){
@@ -184,15 +200,13 @@ String.prototype.filename = function(extension){
                                 $('#number-sex-faces').text("71 Male Face Images.");
                                 localStorage.setItem("ImageType", "m1");
 
-                                
-
                                 // hiding the unnecessary fields in table
                                 for(var i=70;i<=81;i++){
                                   $('#'+i).hide();
                                 }
                                 var image_number = obj.data + 1 ;
                                 $('#survey-image').attr("src","../img/faces/" + image_number + ".jpg");
-                                showCurrentPicNumber(image_number);
+                                showCurrentPicNumber(image_number, "m1");
 
 
                                 if(image_number == 1){
@@ -206,15 +220,13 @@ String.prototype.filename = function(extension){
                                 $('#number-sex-faces').text("79 Male Face Images.");
                                 localStorage.setItem("ImageType", "m2");
 
-                                
-
                                 // hiding the unnecessary fields in table
                                 for(var i=80;i<=81;i++){
                                   $('#'+i).hide();
                                 }
                                 var image_number = obj.data + 1;
                                 $('#survey-image').attr("src","../img/faces/" + image_number + ".jpg");
-                                showCurrentPicNumber(image_number);
+                                showCurrentPicNumber(image_number, "m2");
 
 
                                 if(image_number == 72){
@@ -227,16 +239,13 @@ String.prototype.filename = function(extension){
                                 $('#number-sex-faces').text("69 Female Face Images.");
                                 localStorage.setItem("ImageType", "f1");
 
-                                
-
                                 // hiding the unnecessary fields in table
                                 for(var i=70;i<=81;i++){
                                   $('#'+i).hide();
                                 }
                                 var image_number = obj.data + 1;
                                 $('#survey-image').attr("src","../img/faces/" + image_number + ".jpg");
-                                showCurrentPicNumber(image_number);
-
+                                showCurrentPicNumber(image_number, "f1");
 
                                 if(image_number == 151){
                                   $('#previous-nav-button').hide();
@@ -248,15 +257,13 @@ String.prototype.filename = function(extension){
                                 $('#number-sex-faces').text("69 Male Face Images.");
                                 localStorage.setItem("ImageType", "f2");
 
-                                
-
                                 // hiding the unnecessary fields in table
                                 // for(var i=70;i<=81;i++){
                                 //   $('#'+i).hide();
                                 // }
                                 var image_number = obj.data + 1;
                                 $('#survey-image').attr("src","../img/faces/" + image_number + ".jpg");
-                                showCurrentPicNumber(image_number);
+                                showCurrentPicNumber(image_number, "f2");
 
 
                                 if(image_number == 220){
@@ -271,6 +278,19 @@ String.prototype.filename = function(extension){
                 console.log("some error in fetching the notifications");
              }
           });
+
+$.ajax({
+            type: 'POST',
+            data: 'secretcode='+localStorage.getItem("Secretcode"),
+            contentType: "application/json",
+            dataType:'json',
+            async:false,
+            url: 'http://localhost:8080/scoredimagenumber.json',                      
+            success: function(response) {
+              var obj = JSON.parse(JSON.stringify(response)); 
+              alert(obj.data[0].imageno);
+            }
+      });
 });
 
 

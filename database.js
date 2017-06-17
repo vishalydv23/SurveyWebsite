@@ -104,9 +104,24 @@ function checkType(imageno, callback5){
   });
 }
 
+function getImageNumber(password, callback6){
+  "use strict"
+  var flag = 0;
+  db.serialize(function () {
+      db.all("SELECT imageno FROM score WHERE user" + password + "", function (err, allRows) {
+        if (err){
+          throw err;
+        }else{
+          // console.log(allRows);
+          callback6(allRows);
+        }
+      }); 
+  });
+}
  exports.authentication = authentication;
  exports.adduser = adduser;
  exports.addusertoscoretable = addusertoscoretable;
  exports.checkNumberOfImagesScored = checkNumberOfImagesScored;
  exports.addScore = addScore;
  exports.checkType = checkType;
+ exports.getImageNumber = getImageNumber;
