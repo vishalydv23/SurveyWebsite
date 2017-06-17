@@ -108,8 +108,8 @@ function functionImageDownload(response, postData, pathname, type) {
 
 	var formData = querystring.parse(postData);
 	database.checkNumberOfImagesScored(formData.secretcode, function(result){
-		console.log("Number of images left for :" + result);
-		responsecall(result);
+		console.log("Number of images scored are :" + result);
+		responsecall(result, response, type);
 	});
 
  }
@@ -138,7 +138,7 @@ function functionsubmitscore(response, postData, pathname, type) {
 	if(!isnum){
 		console.log("problem with data as default pic is returned");
 		flag = 1;
-		responsecall(flag);
+		responsecall(flag, response, type);
 	}else{
 		database.addScore(formData.imagenumber, formData.score, formData.secretcode, function(result){
 			if(result == 0){
@@ -170,11 +170,11 @@ function functionsubmitscore(response, postData, pathname, type) {
  	if(formData.password.length != 6){
  		console.log("Secret Code entered is not 6 digit long");
  		flag = 1;
- 		responsecall(flag);
+ 		responsecall(flag, response, type);
  	}else if(!isnum){
  		console.log("entered number is not a number");
  		flag = 2;
- 		responsecall(flag);
+ 		responsecall(flag, response, type);
  	}else{
 		 	database.authentication(formData.password, function(result){
 		 		
@@ -193,23 +193,23 @@ function functionsubmitscore(response, postData, pathname, type) {
 		 					});
 		 					console.log("New Person named " + formData.name + " entered detail successfully");
 		 					flag = 3;
-		 					responsecall(flag);
+		 					responsecall(flag,response, type);
 		 				}
 		 			});
 		 		}else if(result == 3){
 		 			console.log("User already exist and credential matched: he/she can enter the website");
 		 			flag = 4;
-		 			responsecall(flag);
+		 			responsecall(flag,response, type);
 		 		}else{
 		 			console.log("Credentials are wrong. Cannot enter the website");
 		 			flag = 5;
-		 			responsecall(flag);
+		 			responsecall(flag,response, type);
 		 		}
 			});
 		 }
  }
 
-function responsecall(flag){
+function responsecall(flag,response, type){
 	content = '{data:'+flag.toString() +'}';
 	var json = JSON.stringify(eval("(" + content + ")"));
 	type = "application/json";

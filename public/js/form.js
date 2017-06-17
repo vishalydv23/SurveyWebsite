@@ -7,11 +7,6 @@ $(document).ready(function(){
   $('#dobwarning').hide();
   
 
-
-  var d = new Date();
-  if((new Date(formatDate(d)) - new Date(localStorage.getItem("CurrentTime"))) < 4){ //cant loggin before 4 hours
-    alert("There has to ba a difference of 4 hours in 2 sits. Try again when Time is complete");
-  }else{
     $('#login-button').click(function(){
 
       var flag = 1;
@@ -32,6 +27,14 @@ $(document).ready(function(){
         flag = 0;
       }
 
+      var d = new Date();
+      if(localStorage.getItem("CurrentTime") == null){
+        localStorage.setItem("CurrentTime", 0);
+      }
+
+      if((new Date(formatDate(d)) - new Date(localStorage.getItem("CurrentTime"))) < 4){ //cant loggin before 4 hours
+          alert("There has to ba a difference of 4 hours in 2 sits. Try again when Time is complete");
+      }else{
       if(flag == 1){
         $.ajax({
               type: 'POST',
@@ -71,9 +74,9 @@ $(document).ready(function(){
                }
           });
       }
+    }
     });
 
-  }
     
 
     function formatDate(date) {
@@ -82,8 +85,8 @@ $(document).ready(function(){
           day = '' + d.getDate(),
           year = d.getFullYear();
 
-          hour = d.getHour();
-          minutes = date.getMinutes();
+          hour = '' + d.getHours();
+          minutes = '' + date.getMinutes();
 
       if (month.length < 2) month = '0' + month;
       if (day.length < 2) day = '0' + day;

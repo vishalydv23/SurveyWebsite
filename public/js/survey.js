@@ -43,7 +43,7 @@ String.prototype.filename = function(extension){
             url: 'http://localhost:8080/imagedownload.json',                      
             success: function(response) {
                 var obj = JSON.parse(JSON.stringify(response));  
-                if(localStorage.getItem("Gender") == Male){
+                if(localStorage.getItem("Gender") == "Male"){
                                 if(obj.data <= 69){ 
                                 $('#sitting-warning').text("Sitting 1: ");
                                 $('#number-sex-faces').text("69 Female Face Images.");
