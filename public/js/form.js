@@ -32,9 +32,9 @@ $(document).ready(function(){
         localStorage.setItem("CurrentTime", formatDate(d));
       }
 
-      // if((new Date(formatDate(d)) - new Date(localStorage.getItem("CurrentTime"))) < 1){ //cant loggin before 4 hours
-      //     alert("There has to ba a difference of 1 hours between two sittings. Try again when Time is complete");
-      // }else{
+      if((new Date(formatDate(d)) - new Date(localStorage.getItem("CurrentTime"))) < 1){ //cant loggin before 4 hours
+          alert("There has to ba a difference of 1 hours between two sittings. Try again when Time is complete");
+      }else{
       if(flag == 1){
         $.ajax({
               type: 'POST',
@@ -71,7 +71,7 @@ $(document).ready(function(){
                }
           });
       }
-    // }
+    }
     });
 
     

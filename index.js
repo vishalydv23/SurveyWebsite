@@ -15,7 +15,7 @@ var handle = {}
  handle["/authentication.json"] = requestHandlers.functionAuthentication;
  handle["/submitscore.json"] = requestHandlers.functionsubmitscore;
  handle["/scoredimagenumber.json"] = requestHandlers.functionScoredImagesNumber;
- 
+ handle["/imagescore.json"] = requestHandlers.functionImageScore;
 
  handle["/js/form.js"] = requestHandlers.scriptForm;
  handle["/js/instruction.js"] = requestHandlers.scriptInstruction;
@@ -26,9 +26,18 @@ var handle = {}
  handle["/img/bristollogo.png"] = requestHandlers.bristollogo;
  handle["/img/defaultprofile.png"] = requestHandlers.defaultprofile;
 
- for(var i = 1; i <= 300; i++){
+ for(var i = 1; i <= 71; i++){
  	handle["/img/faces/" + i + ".jpg"] = requestHandlers.i2;
  }
- handle["/img/faces/2.jpg"] = requestHandlers.i2;
+ for(var i = 72; i <= 150; i++){
+ 	handle["/img/faces/" + i + ".png"] = requestHandlers.i2;
+ }
+ for(var i = 151; i <= 219; i++){
+ 	handle["/img/faces/" + i + ".jpg"] = requestHandlers.i2;
+ }
+ for(var i = 220; i <= 300; i++){
+ 	handle["/img/faces/" + i + ".png"] = requestHandlers.i2;
+ }
+ // handle["/img/faces/220.jpg"] = requestHandlers.i2;
 
 server.index(router.route, handle);

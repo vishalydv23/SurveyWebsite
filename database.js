@@ -112,8 +112,21 @@ function getImageNumber(password, callback6){
         if (err){
           throw err;
         }else{
-          // console.log(allRows);
           callback6(allRows);
+        }
+      }); 
+  });
+}
+
+function checkScore(imageno, password, callback7){
+  "use strict"
+  var flag = 0;
+  db.serialize(function () {
+      db.all("SELECT user" + password + " AS imageScore FROM score WHERE imageno=" + imageno + "", function (err, row) {
+        if (err){
+          throw err;
+        }else{
+          callback7(row[0].imageScore);
         }
       }); 
   });
@@ -125,3 +138,4 @@ function getImageNumber(password, callback6){
  exports.addScore = addScore;
  exports.checkType = checkType;
  exports.getImageNumber = getImageNumber;
+ exports.checkScore = checkScore;

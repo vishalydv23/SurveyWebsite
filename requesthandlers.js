@@ -95,7 +95,7 @@ function defaultprofile(response, postData, pathname, type){
 }
 
 function i2(response, postData, pathname, type){
-	console.log("bristol logo request is handled");	
+	console.log("new face image request is handled");	
 	var file = "./public" + pathname;
 	fs.readFile(file, ready);
 	function ready(err, content) { deliver(response, type, err, content);}
@@ -177,6 +177,20 @@ function functionScoredImagesNumber(response, postData, pathname, type) {
 	});
 }
 
+
+function functionImageScore(response, postData, pathname, type) {
+	console.log("The image score check function is handled");
+	var formData = querystring.parse(postData);
+	database.checkScore(formData.imagenumber, formData.secretcode, function(result){
+		// console.log("The image score ^^^^^^^^^^^^^^^^^^^^^^ is :" + result);
+		if(result == null){
+			result = 0;
+		}
+		responsecall(result, response, type);
+	});
+}
+
+
  function functionAuthentication(response, postData, pathname, type) {
  	console.log("Authentication function request is handled");
 
@@ -246,6 +260,7 @@ function responsecall(flag,response, type){
  exports.functionAuthentication = functionAuthentication;
  exports.functionsubmitscore = functionsubmitscore;
  exports.functionScoredImagesNumber = functionScoredImagesNumber;
+ exports.functionImageScore = functionImageScore;
 
  exports.scriptForm = scriptForm;
  exports.scriptInstruction = scriptInstruction;
