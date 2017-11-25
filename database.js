@@ -1,6 +1,6 @@
 
 var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('../SurveyWebsite/survey.db');
+var db = new sqlite3.Database('./survey.db');
 
 function authentication(pass, callback) {
   "use strict"
