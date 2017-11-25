@@ -1,4 +1,4 @@
-var database = require("../SurveyWebsite/database");
+var database = require("./database");
 var saveAs = require('file-saver');
 var fs = require("fs");
 var FileReader = require('filereader');
